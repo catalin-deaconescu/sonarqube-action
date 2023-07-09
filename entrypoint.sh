@@ -47,16 +47,7 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
       dotnet tool install --global dotnet-sonarscanner
       echo '0';
       #export PATH="$PATH:/tmp/.dotnet/tools"
-      /github/home/.dotnet/tools/dotnet-sonarscanner begin \
-        -Dsonar.host.url="${INPUT_HOST}" \
-        -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
-        -Dsonar.projectName="${SONAR_PROJECTNAME}" \
-        -Dsonar.projectVersion="${SONAR_PROJECTVERSION}_Net" \
-        -Dsonar.projectBaseDir="/github/workspace" \
-        -Dsonar.login="${INPUT_LOGIN}" \
-        -Dsonar.password="${SONAR_PASSWORD}" \
-        -Dsonar.sources="${INPUT_NETLOCATION}" \
-        -Dsonar.sourceEncoding="${INPUT_ENCODING}"
+      /github/home/.dotnet/tools/dotnet-sonarscanner begin /k:"${SONAR_PROJECTKEY}" /-d:sonar.host.url="${INPUT_HOST}" /-d:sonar.projectKey="${SONAR_PROJECTKEY}" /-d:sonar.projectName="${SONAR_PROJECTNAME}" /-d:sonar.projectVersion="${SONAR_PROJECTVERSION}_Net" /-d:sonar.projectBaseDir="/github/workspace" /-d:sonar.login="${INPUT_LOGIN}" /-d:sonar.password="${SONAR_PASSWORD}" /-d:sonar.sources="${INPUT_NETLOCATION}" /-d:sonar.sourceEncoding="${INPUT_ENCODING}"
       echo '1';
       dotnet build /github/workspace${INPUT_NETLOCATIONSLN}/
       echo '2';

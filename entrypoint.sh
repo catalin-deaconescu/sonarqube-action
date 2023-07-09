@@ -30,12 +30,12 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
   ls -d */
 
   #check if any location for scan is defined
-  if [[ -z ${INPUT_ANGULARLOCATION} || -z ${INPUT_NETLOCATION} || -z ${INPUT_NODELOCATION} || -z ${INPUT_PYTHONLOCATION} ]];  then
+  if [[ ! -z ${INPUT_ANGULARLOCATION} || ! -z ${INPUT_NETLOCATION} || ! -z ${INPUT_NODELOCATION} || ! -z ${INPUT_PYTHONLOCATION} ]];  then
     
     
 
     #check angular location
-    if [ -z ${INPUT_ANGULARLOCATION} ]; then
+    if [ ! -z ${INPUT_ANGULARLOCATION} ]; then
       echo 'start for angular';
       sonar-scanner \
         -Dsonar.host.url="${INPUT_HOST}" \
@@ -50,17 +50,17 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
     fi
 
     #check .net location
-    if [ -z ${INPUT_NETLOCATION} ]; then
+    if [ ! -z ${INPUT_NETLOCATION} ]; then
       echo 'start for .net';
     fi
 
     #check node location
-    if [ -z ${INPUT_NODELOCATION} ]; then
+    if [ ! -z ${INPUT_NODELOCATION} ]; then
       echo 'start for node';
     fi
 
     #check python location
-    if [ -z ${INPUT_PYTHONLOCATION} ]; then
+    if [ ! -z ${INPUT_PYTHONLOCATION} ]; then
       echo 'start for python';
     fi
 

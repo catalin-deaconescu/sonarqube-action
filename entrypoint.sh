@@ -33,7 +33,7 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
   #check if any location for scan is defined
   if [[ ! -z ${INPUT_ANGULARLOCATION} || ! -z ${INPUT_NETLOCATION} || ! -z ${INPUT_NODELOCATION} || ! -z ${INPUT_PYTHONLOCATION} || ! -z ${INPUT_SQLLOCATION} ]];  then
    
-    arrVar = ();
+    arrVar=();
 
     #check angular location
     if [ ! -z ${INPUT_ANGULARLOCATION} ]; then

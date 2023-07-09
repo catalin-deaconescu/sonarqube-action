@@ -21,6 +21,8 @@ if [[ -f "${INPUT_PROJECTBASEDIR%/}build.gradle" ]]; then
   exit 1
 fi
 
+ls -d */
+
 #check sonar inputs
 if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
   [[ -z "${INPUT_PROJECTKEY}" ]] && SONAR_PROJECTKEY="${REPOSITORY_NAME}" || SONAR_PROJECTKEY="${INPUT_PROJECTKEY}"

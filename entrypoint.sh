@@ -33,10 +33,44 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
   #check if any location for scan is defined
   if [[ ! -z ${INPUT_ANGULARLOCATION} || ! -z ${INPUT_NETLOCATION} || ! -z ${INPUT_NODELOCATION} || ! -z ${INPUT_PYTHONLOCATION} || ! -z ${INPUT_SQLLOCATION} ]];  then
    
+    arrVar = ();
+
     #check angular location
     if [ ! -z ${INPUT_ANGULARLOCATION} ]; then
-      echo 'start for angular';
-      sonar-scanner \
+      echo 'adding angular';
+      arrVar+="/github/workspace${INPUT_ANGULARLOCATION}"; 
+    fi
+
+    #check .net location
+    if [ ! -z ${INPUT_NETLOCATION} ]; then
+      echo 'adding .net';
+      arrVar+="/github/workspace${INPUT_NETLOCATION}";
+    fi
+
+    #check node location
+    if [ ! -z ${INPUT_NODELOCATION} ]; then
+      echo 'adding node';
+      arrVar+="/github/workspace${INPUT_NODELOCATION}";
+    fi
+
+    #check python location
+    if [ ! -z ${INPUT_PYTHONLOCATION} ]; then
+      echo 'adding python';
+      arrVar+="/github/workspace${INPUT_PYTHONLOCATION}";
+    fi
+
+    #check SQL location
+    if [ ! -z ${INPUT_SQLLOCATION} ]; then
+      echo 'adding SQL';
+      arrVar+="/github/workspace${INPUT_SQLLOCATION}";
+    fi
+
+    function join { local IFS="$1"; shift; echo "$*"; }
+    result=$(join , ${arrVar[@]})
+    echo $result
+
+    echo 'starting run';
+    sonar-scanner \
         -Dsonar.host.url="${INPUT_HOST}" \
         -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
         -Dsonar.projectName="${SONAR_PROJECTNAME}" \
@@ -44,49 +78,8 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
         -Dsonar.projectBaseDir="/github/workspace${INPUT_ANGULARLOCATION}" \
         -Dsonar.login="${INPUT_LOGIN}" \
         -Dsonar.password="${SONAR_PASSWORD}" \
-        -Dsonar.sources="/github/workspace${INPUT_ANGULARLOCATION}" \
+        -Dsonar.sources="${result}" \
         -Dsonar.sourceEncoding="${INPUT_ENCODING}"
-    fi
-
-    #check .net location
-    if [ ! -z ${INPUT_NETLOCATION} ]; then
-      echo 'start for .net';
-      sonar-scanner \
-        -Dsonar.host.url="${INPUT_HOST}" \
-        -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
-        -Dsonar.projectName="${SONAR_PROJECTNAME}" \
-        -Dsonar.projectVersion="${SONAR_PROJECTVERSION}" \
-        -Dsonar.projectBaseDir="/github/workspace${INPUT_NETLOCATION}" \
-        -Dsonar.login="${INPUT_LOGIN}" \
-        -Dsonar.password="${SONAR_PASSWORD}" \
-        -Dsonar.sources="/github/workspace${INPUT_NETLOCATION}" \
-        -Dsonar.sourceEncoding="${INPUT_ENCODING}"
-    fi
-
-    #check node location
-    if [ ! -z ${INPUT_NODELOCATION} ]; then
-      echo 'start for node';
-    fi
-
-    #check python location
-    if [ ! -z ${INPUT_PYTHONLOCATION} ]; then
-      echo 'start for python';
-    fi
-
-    #check SQL location
-    if [ ! -z ${INPUT_SQLLOCATION} ]; then
-      echo 'start for SQL';
-      sonar-scanner \
-        -Dsonar.host.url="${INPUT_HOST}" \
-        -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
-        -Dsonar.projectName="${SONAR_PROJECTNAME}" \
-        -Dsonar.projectVersion="${SONAR_PROJECTVERSION}" \
-        -Dsonar.projectBaseDir="/github/workspace${INPUT_SQLLOCATION}" \
-        -Dsonar.login="${INPUT_LOGIN}" \
-        -Dsonar.password="${SONAR_PASSWORD}" \
-        -Dsonar.sources="/github/workspace${INPUT_SQLLOCATION}" \
-        -Dsonar.sourceEncoding="${INPUT_ENCODING}"
-    fi
 
   else
     echo "::error I have no idea what you want to run Sonar for. Check your locations.";

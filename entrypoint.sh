@@ -21,6 +21,7 @@ if [[ -f "${INPUT_PROJECTBASEDIR%/}build.gradle" ]]; then
   exit 1
 fi
 
+pwd
 ls -d */
 
 #check sonar inputs

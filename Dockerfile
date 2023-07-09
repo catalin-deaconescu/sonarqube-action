@@ -5,10 +5,10 @@ LABEL "com.github.actions.description"="Scan your code with SonarQube Scanner to
 LABEL "com.github.actions.icon"="check"
 LABEL "com.github.actions.color"="green"
 
-LABEL version="0.0.2"
-LABEL repository="https://github.com/kitabisa/sonarqube-action"
-LABEL homepage="https://kitabisa.github.io"
-LABEL maintainer="dwisiswant0"
+LABEL version="0.0.1"
+LABEL repository="https://github.com/catalin-deaconescu/sonarqube-action"
+#LABEL homepage="https://kitabisa.github.io"
+LABEL maintainer="catalin-deaconescu"
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

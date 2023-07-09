@@ -10,6 +10,9 @@ LABEL repository="https://github.com/catalin-deaconescu/sonarqube-action"
 #LABEL homepage="https://kitabisa.github.io"
 LABEL maintainer="catalin-deaconescu"
 
+RUN apk add dotnet7-sdk
+RUN dotnet tool install --global dotnet-sonarscanner
+
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

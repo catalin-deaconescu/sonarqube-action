@@ -45,12 +45,13 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
     if [ ! -z ${INPUT_NETLOCATION} ]; then
       echo 'adding .net';
       dotnet tool install --global dotnet-sonarscanner
-      export PATH="$PATH:/tmp/.dotnet/tools"
-      dotnet sonarscanner begin /k:"${SONAR_PROJECTKEY}" /d:sonar.token="${INPUT_LOGIN}"
+      echo '0';
+      #export PATH="$PATH:/tmp/.dotnet/tools"
+      /github/home/.dotnet/tools/dotnet-sonarscanner begin /k:"${SONAR_PROJECTKEY}" /d:sonar.token="${INPUT_LOGIN}"
       echo '1';
       dotnet build /github/workspace${INPUT_NETLOCATIONSLN}/
       echo '2';
-      dotnet sonarscanner end /d:sonar.token="${INPUT_LOGIN}"
+      /github/home/.dotnet/tools/dotnet-sonarscanner end /d:sonar.token="${INPUT_LOGIN}"
       echo '3';
       arrVar+=("/github/workspace${INPUT_NETLOCATION}");
     fi

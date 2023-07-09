@@ -11,8 +11,6 @@ LABEL repository="https://github.com/catalin-deaconescu/sonarqube-action"
 LABEL maintainer="catalin-deaconescu"
 
 RUN apk add dotnet7-sdk
-RUN dotnet tool install --global dotnet-sonarscanner
-RUN export PATH="$PATH:/tmp/.dotnet/tools"
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

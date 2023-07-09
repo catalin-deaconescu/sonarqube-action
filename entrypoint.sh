@@ -21,19 +21,12 @@ if [[ -f "${INPUT_PROJECTBASEDIR%/}build.gradle" ]]; then
   exit 1
 fi
 
-unset JAVA_HOME
-
-if [ -z ${INPUT_ANGULARLOCATION} ]; then echo "angular location is unset"; else echo "angular location is set to '$var'"; fi
-if [ -z ${INPUT_NETLOCATION} ]; then echo ".net location is unset"; else echo ".net location is set to '$var'"; fi
-if [ -z ${INPUT_NODELOCATION} ]; then echo "node location is unset"; else echo "node location is set to '$var'"; fi
-
 if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
   [[ -z "${INPUT_PROJECTKEY}" ]] && SONAR_PROJECTKEY="${REPOSITORY_NAME}" || SONAR_PROJECTKEY="${INPUT_PROJECTKEY}"
   [[ -z "${INPUT_PROJECTNAME}" ]] && SONAR_PROJECTNAME="${REPOSITORY_NAME}" || SONAR_PROJECTNAME="${INPUT_PROJECTNAME}"
   [[ -z "${INPUT_PROJECTVERSION}" ]] && SONAR_PROJECTVERSION="" || SONAR_PROJECTVERSION="${INPUT_PROJECTVERSION}"
 
-  #if [[ ! -z ${INPUT_ANGULARLOCATION} && ! -z ${INPUT_NETLOCATION} && ! -z ${INPUT_NODELOCATION} && ! -z ${INPUT_PYTHONLOCATION} ]];  then
-  if [[ ! -z ${INPUT_NODELOCATION} && ! -z ${INPUT_PYTHONLOCATION} && ! -z ${INPUT_NODELOCATION} && ! -z ${INPUT_PYTHONLOCATION} ]];  then
+  if [[ ! -z ${INPUT_ANGULARLOCATION} && ! -z ${INPUT_NETLOCATION} && ! -z ${INPUT_NODELOCATION} && ! -z ${INPUT_PYTHONLOCATION} ]];  then
     echo "something";
   else
     echo "::error I have no idea what you want to run Sonar for. Check your locations.";

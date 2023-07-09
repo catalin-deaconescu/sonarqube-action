@@ -38,35 +38,34 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
     #check angular location
     if [ ! -z ${INPUT_ANGULARLOCATION} ]; then
       echo 'adding angular';
-      arrVar+="/github/workspace${INPUT_ANGULARLOCATION}"; 
+      arrVar+=("/github/workspace${INPUT_ANGULARLOCATION}"); 
     fi
 
     #check .net location
     if [ ! -z ${INPUT_NETLOCATION} ]; then
       echo 'adding .net';
-      arrVar+="/github/workspace${INPUT_NETLOCATION}";
+      arrVar+=("/github/workspace${INPUT_NETLOCATION}");
     fi
 
     #check node location
     if [ ! -z ${INPUT_NODELOCATION} ]; then
       echo 'adding node';
-      arrVar+="/github/workspace${INPUT_NODELOCATION}";
+      arrVar+=("/github/workspace${INPUT_NODELOCATION}");
     fi
 
     #check python location
     if [ ! -z ${INPUT_PYTHONLOCATION} ]; then
       echo 'adding python';
-      arrVar+="/github/workspace${INPUT_PYTHONLOCATION}";
+      arrVar+=("/github/workspace${INPUT_PYTHONLOCATION}");
     fi
 
     #check SQL location
     if [ ! -z ${INPUT_SQLLOCATION} ]; then
       echo 'adding SQL';
-      arrVar+="/github/workspace${INPUT_SQLLOCATION}";
+      arrVar+=("/github/workspace${INPUT_SQLLOCATION}");
     fi
 
-    function join { local IFS="$1"; shift; echo "$*"; }
-    result=$(join , ${arrVar[@]})
+    result=$(IFS=, ; echo "${arrVar[*]}")
     echo $result
 
     echo 'starting run';

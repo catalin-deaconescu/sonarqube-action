@@ -74,7 +74,7 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
         -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
         -Dsonar.projectName="${SONAR_PROJECTNAME}" \
         -Dsonar.projectVersion="${SONAR_PROJECTVERSION}" \
-        -Dsonar.projectBaseDir="/github/workspace${INPUT_ANGULARLOCATION}" \
+        -Dsonar.projectBaseDir="/github/workspace" \
         -Dsonar.login="${INPUT_LOGIN}" \
         -Dsonar.password="${SONAR_PASSWORD}" \
         -Dsonar.sources="${result}" \

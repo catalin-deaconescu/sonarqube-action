@@ -23,11 +23,9 @@ fi
 
 unset JAVA_HOME
 
-echo "${INPUT_HOST}"
-echo "${INPUT_PROJECTKEY}"
-echo "${INPUT_HOST}"
-echo "${INPUT_ANGULARLOCATION}"
-echo "${INPUT_NETLOCATION}"
+if [ -z ${INPUT_ANGULARLOCATION} ]; then echo "angular location is unset"; else echo "angular location is set to '$var'"; fi
+if [ -z ${INPUT_NETLOCATION} ]; then echo ".net location is unset"; else echo ".net location is set to '$var'"; fi
+if [ -z ${INPUT_NODELOCATION} ]; then echo "node location is unset"; else echo "node location is set to '$var'"; fi
 
 if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
   [[ -z "${INPUT_PROJECTKEY}" ]] && SONAR_PROJECTKEY="${REPOSITORY_NAME}" || SONAR_PROJECTKEY="${INPUT_PROJECTKEY}"
@@ -45,7 +43,7 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
 #    -Dsonar.sources="${INPUT_PROJECTBASEDIR}" \
 #    -Dsonar.sourceEncoding="${INPUT_ENCODING}"
 else
-  echo "2"
+  echo ":: error I don't know why you ended up here. Check missing variables in your workflow"
 #  sonar-scanner \
 #    -Dsonar.host.url="${INPUT_HOST}" \
 #    -Dsonar.login="${INPUT_LOGIN}" \

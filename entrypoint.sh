@@ -44,6 +44,7 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
     #check .net location
     if [ ! -z ${INPUT_NETLOCATION} ]; then
       echo 'adding .net';
+      dotnet tool list -g
       dotnet sonarscanner begin /k:"${SONAR_PROJECTKEY}" /d:sonar.token="${INPUT_LOGIN}"
       echo '1';
       dotnet build /github/workspace${INPUT_NETLOCATIONSLN}/

@@ -41,10 +41,10 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
         -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
         -Dsonar.projectName="${SONAR_PROJECTNAME}" \
         -Dsonar.projectVersion="${SONAR_PROJECTVERSION}" \
-        -Dsonar.projectBaseDir="${INPUT_ANGULARLOCATION}" \
+        -Dsonar.projectBaseDir="/github/workspace${INPUT_ANGULARLOCATION}" \
         -Dsonar.login="${INPUT_LOGIN}" \
         -Dsonar.password="${SONAR_PASSWORD}" \
-        -Dsonar.sources="${INPUT_ANGULARLOCATION}" \
+        -Dsonar.sources="/github/workspace${INPUT_ANGULARLOCATION}" \
         -Dsonar.sourceEncoding="${INPUT_ENCODING}"
     fi
 
@@ -56,10 +56,10 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
         -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
         -Dsonar.projectName="${SONAR_PROJECTNAME}" \
         -Dsonar.projectVersion="${SONAR_PROJECTVERSION}" \
-        -Dsonar.projectBaseDir="${INPUT_NETLOCATION}" \
+        -Dsonar.projectBaseDir="/github/workspace${INPUT_NETLOCATION}" \
         -Dsonar.login="${INPUT_LOGIN}" \
         -Dsonar.password="${SONAR_PASSWORD}" \
-        -Dsonar.sources="${INPUT_NETLOCATION}" \
+        -Dsonar.sources="/github/workspace${INPUT_NETLOCATION}" \
         -Dsonar.sourceEncoding="${INPUT_ENCODING}"
     fi
 
@@ -81,10 +81,10 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
         -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
         -Dsonar.projectName="${SONAR_PROJECTNAME}" \
         -Dsonar.projectVersion="${SONAR_PROJECTVERSION}" \
-        -Dsonar.projectBaseDir="${INPUT_SQLLOCATION}" \
+        -Dsonar.projectBaseDir="/github/workspace${INPUT_SQLLOCATION}" \
         -Dsonar.login="${INPUT_LOGIN}" \
         -Dsonar.password="${SONAR_PASSWORD}" \
-        -Dsonar.sources="${INPUT_SQLLOCATION}" \
+        -Dsonar.sources="/github/workspace${INPUT_SQLLOCATION}" \
         -Dsonar.sourceEncoding="${INPUT_ENCODING}"
     fi
 

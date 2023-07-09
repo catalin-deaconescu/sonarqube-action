@@ -27,13 +27,9 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
   [[ -z "${INPUT_PROJECTNAME}" ]] && SONAR_PROJECTNAME="${REPOSITORY_NAME}" || SONAR_PROJECTNAME="${INPUT_PROJECTNAME}"
   [[ -z "${INPUT_PROJECTVERSION}" ]] && SONAR_PROJECTVERSION="" || SONAR_PROJECTVERSION="${INPUT_PROJECTVERSION}"
 
-  ls -d */
-
   #check if any location for scan is defined
-  if [[ ! -z ${INPUT_ANGULARLOCATION} || ! -z ${INPUT_NETLOCATION} || ! -z ${INPUT_NODELOCATION} || ! -z ${INPUT_PYTHONLOCATION} ]];  then
-    
-    
-
+  if [[ ! -z ${INPUT_ANGULARLOCATION} || ! -z ${INPUT_NETLOCATION} || ! -z ${INPUT_NODELOCATION} || ! -z ${INPUT_PYTHONLOCATION} || ! -z ${INPUT_SQLLOCATION} ]];  then
+   
     #check angular location
     if [ ! -z ${INPUT_ANGULARLOCATION} ]; then
       echo 'start for angular';
@@ -52,6 +48,16 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
     #check .net location
     if [ ! -z ${INPUT_NETLOCATION} ]; then
       echo 'start for .net';
+      sonar-scanner \
+        -Dsonar.host.url="${INPUT_HOST}" \
+        -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
+        -Dsonar.projectName="${SONAR_PROJECTNAME}" \
+        -Dsonar.projectVersion="${SONAR_PROJECTVERSION}" \
+        -Dsonar.projectBaseDir="${INPUT_NETLOCATION}" \
+        -Dsonar.login="${INPUT_LOGIN}" \
+        -Dsonar.password="${SONAR_PASSWORD}" \
+        -Dsonar.sources="${INPUT_NETLOCATION}" \
+        -Dsonar.sourceEncoding="${INPUT_ENCODING}"
     fi
 
     #check node location
@@ -62,6 +68,21 @@ if [[ ! -f "${INPUT_PROJECTBASEDIR%/}sonar-project.properties" ]]; then
     #check python location
     if [ ! -z ${INPUT_PYTHONLOCATION} ]; then
       echo 'start for python';
+    fi
+
+    #check SQL location
+    if [ ! -z ${INPUT_SQLLOCATION} ]; then
+      echo 'start for SQL';
+      sonar-scanner \
+        -Dsonar.host.url="${INPUT_HOST}" \
+        -Dsonar.projectKey="${SONAR_PROJECTKEY}" \
+        -Dsonar.projectName="${SONAR_PROJECTNAME}" \
+        -Dsonar.projectVersion="${SONAR_PROJECTVERSION}" \
+        -Dsonar.projectBaseDir="${INPUT_SQLLOCATION}" \
+        -Dsonar.login="${INPUT_LOGIN}" \
+        -Dsonar.password="${SONAR_PASSWORD}" \
+        -Dsonar.sources="${INPUT_SQLLOCATION}" \
+        -Dsonar.sourceEncoding="${INPUT_ENCODING}"
     fi
 
   else
